@@ -1,0 +1,82 @@
+.banner {
+  background-color: #000;
+  color: #fff;
+  padding: 60px 20px;
+}
+
+.banner-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.banner-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.banner-description {
+  font-size: 0.9rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  max-width: 600px;
+}
+
+.banner-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.button {
+  padding: 12px 24px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.button-primary {
+  background-color: #fff;
+  color: #000;
+}
+
+.button-primary:hover {
+  background-color: #f0f0f0;
+}
+
+.button-secondary {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.button-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .banner-title {
+    font-size: 2rem;
+  }
+
+  .banner-description {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .banner-title {
+    font-size: 1.75rem;
+  }
+
+  .banner-buttons {
+    flex-direction: column;
+  }
+
+  .button {
+    width: 100%;
+    text-align: center;
+  }
+}
