@@ -1,6 +1,11 @@
 .products {
-  padding: 60px 20px;
+  /* padding: 60px 20px; */
   background-color: #fff;
+}
+
+.loading{
+  height: 100vh;
+  width: 100vw;
 }
 
 .products-container {
@@ -62,6 +67,7 @@
 }
 
 .product-image {
+  cursor: pointer;
   aspect-ratio: 1;
   overflow: hidden;
   margin-bottom: 16px;
@@ -85,6 +91,7 @@
 }
 
 .product-details {
+  cursor: pointer;
   width: 90%;
   margin: auto;
   display: flex;

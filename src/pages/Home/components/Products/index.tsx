@@ -1,18 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import StarRating from '../../../../components/StarRating';
+import { RootState, AppDispatch } from "../../../../redux/store";
+import { fetchProducts } from "../../../../redux/slices/productSlice";
+import { openModal } from '../../../../redux/slices/modalSlice';
 import './Products.css';
-import { getAllProducts } from '../../../../services/api/products';
-import { ProductType } from '../../../../types/product';
 
 const Products = () => {
-    const [products, setProducts] = useState<ProductType[]>([])
+    const dispatch = useDispatch<AppDispatch>(); 
+    const { products, loading, error } = useSelector((state: RootState) => state.products);
 
     useEffect(() => {
-        (async () => {
-            const response = await getAllProducts();
-            setProducts(response);
-        })()
-    }, [])
+        dispatch(fetchProducts());
+    }, [dispatch]);
+
+    if (loading) return <div className='loading'></div>;
+    if (error) return <p>Error: {error}</p>;
 
     return (
         <section className="products">
@@ -25,11 +28,11 @@ const Products = () => {
                 <div className="products-grid">
                     {products.map((product) => (
                         <div key={product.id} className="product-card">
-                            <div className="product-image">
+                            <div className="product-image" onClick={() => dispatch(openModal(product))}>
                                 <img src={product.image} alt={product.title} />
                             </div>
                             <div className="product-content">
-                                <div className="product-details">
+                                <div className="product-details" onClick={() => dispatch(openModal(product))}>
                                     <h3 className="product-name">{product.title}</h3>
                                     <div className="product-price-rating">
                                         <span className="product-price">${product.price}</span>
