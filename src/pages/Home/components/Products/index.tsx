@@ -18,7 +18,7 @@ const Products = () => {
     if (error) return <p>Error: {error}</p>;
 
     return (
-        <section className="products">
+        <section className="products" id="products">
             <div className="products-container">
                 <div className="products-header">
                     <div className="category-tag">Our Products</div>

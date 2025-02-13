@@ -16,6 +16,19 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
+export const fetchProductsByCategory = createAsyncThunk(
+  "products/fetchByCategory",
+  async (category: string, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/category/${category}`);
+      if (!response.ok) throw new Error("Failed to fetch products by category");
+      return await response.json();
+    } catch (error) {
+      return rejectWithValue(error instanceof Error ? error.message : "Unknown error");
+    }
+  }
+);
+
 interface ProductState {
   products: ProductType[];
   loading: boolean;
@@ -46,6 +59,18 @@ const productSlice = createSlice({
         state.loading = false;
         state.error = action.payload as string;
       })
+      .addCase(fetchProductsByCategory.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchProductsByCategory.fulfilled, (state, action: PayloadAction<ProductType[]>) => {
+        state.loading = false;
+        state.products = action.payload;
+      })
+      .addCase(fetchProductsByCategory.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      });
   },
 });
 
