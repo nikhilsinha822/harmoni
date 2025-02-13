@@ -38,9 +38,9 @@ const ProductModal = () => {
                         <div className="rating">
                             <StarRating rating={selectedProduct?.rating.rate || 0} count={selectedProduct?.rating.count || 0}/>
                         </div>
-                        <div className="price">$109.95</div>
+                        <div className="price">${selectedProduct?.price}</div>
                         <p className="description">
-                            Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday!
+                            {selectedProduct?.description}
                         </p>
                         <div className="purchase-controls">
                             <div className="quantity-controls">
