@@ -10,7 +10,7 @@ const ProductModal = () => {
     const dispatch = useDispatch<AppDispatch>();
     const { isOpen, selectedProduct } = useSelector((state: RootState) => state.modal)
 
-    const [quantity, setQuantity] = useState(2);
+    const [quantity, setQuantity] = useState(1);
 
     const handleDecrement = () => {
         if (quantity > 1) setQuantity(quantity - 1);
