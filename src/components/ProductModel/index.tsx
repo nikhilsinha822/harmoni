@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../redux/slices/modalSlice";
 import { RootState, AppDispatch } from "../../redux/store";
 import StarRating from "../StarRating";
+import { addToCart } from "../../redux/slices/cartSlice";
 
 const ProductModal = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -18,6 +19,12 @@ const ProductModal = () => {
     const handleIncrement = () => {
         setQuantity(quantity + 1);
     };
+
+    const handleAddToCart = () => {
+        if (!selectedProduct) return;
+        dispatch(addToCart({ product: selectedProduct, quantity }))
+        setQuantity(1);
+    }
 
     if (!isOpen) return null;
 
@@ -36,7 +43,7 @@ const ProductModal = () => {
                     <div className="product-modal-details">
                         <h2 className="product-modal-title">{selectedProduct?.title}</h2>
                         <div className="rating">
-                            <StarRating rating={selectedProduct?.rating.rate || 0} count={selectedProduct?.rating.count || 0}/>
+                            <StarRating rating={selectedProduct?.rating.rate || 0} count={selectedProduct?.rating.count || 0} />
                         </div>
                         <div className="price">${selectedProduct?.price}</div>
                         <p className="description">
@@ -53,7 +60,7 @@ const ProductModal = () => {
                                 />
                                 <button onClick={handleIncrement} className="quantity-btn increment">+</button>
                             </div>
-                            <button className="buy-button">Buy Now</button>
+                            <button className="cart-button" onClick={handleAddToCart}>Add to Cart</button>
                         </div>
                     </div>
                 </div>

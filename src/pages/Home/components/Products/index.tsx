@@ -5,14 +5,20 @@ import { RootState, AppDispatch } from "../../../../redux/store";
 import { fetchProducts } from "../../../../redux/slices/productSlice";
 import { openModal } from '../../../../redux/slices/modalSlice';
 import './Products.css';
+import { addToCart } from '../../../../redux/slices/cartSlice';
+import { ProductType } from '../../../../types/product';
 
 const Products = () => {
-    const dispatch = useDispatch<AppDispatch>(); 
+    const dispatch = useDispatch<AppDispatch>();
     const { products, loading, error } = useSelector((state: RootState) => state.products);
 
     useEffect(() => {
         dispatch(fetchProducts());
     }, [dispatch]);
+
+    const handleAddToCart = (product: ProductType) => {
+        dispatch(addToCart({ product, quantity: 1 }))
+    }
 
     if (loading) return <div className='loading'></div>;
     if (error) return <p>Error: {error}</p>;
@@ -39,7 +45,7 @@ const Products = () => {
                                         <StarRating rating={product.rating.rate} count={product.rating.count} />
                                     </div>
                                 </div>
-                                <button className="add-to-cart">Add To Cart</button>
+                                <button className="add-to-cart" onClick={() => handleAddToCart(product)}>Add To Cart</button>
                             </div>
                         </div>
                     ))}

@@ -129,7 +129,7 @@
   padding: 8px 0;
 }
 
-.buy-button {
+.cart-button {
   background: #000;
   color: white;
   border: none;
@@ -141,7 +141,7 @@
   font-size: clamp(14px, 1vw, 16px);
 }
 
-.buy-button:hover {
+.cart-button:hover {
   background: #333;
 }
 

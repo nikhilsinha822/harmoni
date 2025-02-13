@@ -16,6 +16,9 @@ const Navbar = () => {
 
   const dispatch = useDispatch<AppDispatch>();
   const { categories, loading } = useSelector((state: RootState) => state.categories);
+  const cartItemCount = useSelector((state: RootState) => 
+    state.cart?.totalQuantity || 0
+  );
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -34,7 +37,6 @@ const Navbar = () => {
     dispatch(fetchProductsByCategory(category));
     setSearchQuery("");
 
-    // Scroll to the products section
     const productsSection = document.getElementById("products");
     if (productsSection) {
       productsSection.scrollIntoView({ behavior: "smooth" });
@@ -90,7 +92,12 @@ const Navbar = () => {
         </div>
 
         <div className="nav-icons">
-          <a href="/cart" className="cart-icon"><FaCartShopping /></a>
+          <a href="/cart" className="cart-icon-wrapper">
+            <FaCartShopping className="cart-icon" />
+            {cartItemCount > 0 && (
+              <span className="cart-count">{cartItemCount}</span>
+            )}
+          </a>
           <a href="/profile" className="profile-icon"><IoPerson /></a>
           <button className="nav-toggle" onClick={toggleMenu}>
             {isOpen ? <IoCloseOutline /> : <GiHamburgerMenu />}
